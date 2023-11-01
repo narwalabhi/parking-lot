@@ -17,7 +17,7 @@ public class Gate extends BaseModel {
     }
 
     public Gate(Builder builder) {
-        super(builder.id, builder.operator.getOperator());
+        super(builder.id, builder.operator.getName());
         this.gateNumber = builder.gateNumber;
         this.status = GateStatus.OPEN;
         this.gateType = builder.gateType;
