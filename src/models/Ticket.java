@@ -6,10 +6,11 @@ import exception.InvalidParkingSlotException;
 import exception.InvalidVehicleException;
 import models.constants.TicketStatus;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Ticket extends BaseModel{
-    private Date entryTime;
+    private LocalDateTime entryTime;
     private Vehicle vehicle;
     private ParkingSlot parkingSlot;
     private Gate gate;
@@ -27,7 +28,7 @@ public class Ticket extends BaseModel{
         this.status = TicketStatus.ACTIVE;
     }
 
-    public Date getEntryTime() {
+    public LocalDateTime getEntryTime() {
         return entryTime;
     }
 
@@ -55,7 +56,7 @@ public class Ticket extends BaseModel{
 
         private int id;
         private String createdBy;
-        private Date entryTime;
+        private LocalDateTime entryTime;
         private Vehicle vehicle;
         private ParkingSlot parkingSlot;
         private Gate gate;
@@ -70,7 +71,7 @@ public class Ticket extends BaseModel{
             return this;
         }
 
-        public Builder setEntryTime(Date entryTime) {
+        public Builder setEntryTime(LocalDateTime entryTime) {
             this.entryTime = entryTime;
             return this;
         }
@@ -121,7 +122,7 @@ public class Ticket extends BaseModel{
         }
 
         private void verifyEntryTime() throws InvalidEntryTimeException {
-            if(entryTime == null || entryTime.getTime() > new Date().getTime()){
+            if(entryTime == null || entryTime.isAfter(LocalDateTime.now())){
                 throw new InvalidEntryTimeException("Entry time cannot be empty or in future");
             }
         }

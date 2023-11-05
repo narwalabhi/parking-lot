@@ -43,6 +43,14 @@ public class ParkingSlot extends BaseModel{
         this.vehicle = vehicle;
     }
 
+    public VehicleType getSupportedVehicleType() {
+        return vehicleType;
+    }
+
+    public ParkingSlotStatus getParkingSlotStatus() {
+        return status;
+    }
+
     public static class Builder{
 
         private int id;

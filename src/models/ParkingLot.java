@@ -67,6 +67,10 @@ public class ParkingLot extends BaseModel{
         this.slotAllocationStrategy = slotAllocationStrategy;
     }
 
+    public List<ParkingFloor> getParkingFloors(){
+        return parkingFloors;
+    }
+
     public static class Builder {
         private int id;
         private String createdBy;
@@ -102,7 +106,7 @@ public class ParkingLot extends BaseModel{
             return this;
         }
 
-        public Builder parkingSlots(List<ParkingFloor> parkingFloors) {
+        public Builder parkingFloors(List<ParkingFloor> parkingFloors) {
             this.parkingFloors = parkingFloors;
             return this;
         }

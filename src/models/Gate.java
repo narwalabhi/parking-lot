@@ -1,5 +1,6 @@
 package models;
 
+import exception.InvalidFloorNumberException;
 import exception.InvalidGateNumberException;
 import exception.InvalidGateTypeException;
 import exception.InvalidOperatorException;
@@ -8,6 +9,7 @@ import models.constants.GateType;
 
 public class Gate extends BaseModel {
     private int gateNumber;
+    private int floorNumber;
     private GateType gateType;
     private GateStatus status;
     private Operator operator;
@@ -47,11 +49,21 @@ public class Gate extends BaseModel {
         return operator;
     }
 
+    public int getFloorNumber() {
+        return floorNumber;
+    }
+
     public static class Builder {
         private int id;
         private int gateNumber;
         private GateType gateType;
         private Operator operator;
+        private int floorNumber;
+
+        public Builder floorNumber(int floorNumber) {
+            this.floorNumber = floorNumber;
+            return this;
+        }
 
         public Builder id(int id) {
             this.id = id;
@@ -74,15 +86,22 @@ public class Gate extends BaseModel {
             return this;
         }
 
-        public Gate build() throws InvalidOperatorException, InvalidGateNumberException, InvalidGateTypeException {
+        public Gate build() throws InvalidOperatorException, InvalidGateNumberException, InvalidGateTypeException, InvalidFloorNumberException {
             verify();
             return new Gate(this);
         }
 
-        private void verify() throws InvalidGateNumberException, InvalidGateTypeException, InvalidOperatorException {
+        private void verify() throws InvalidGateNumberException, InvalidGateTypeException, InvalidOperatorException, InvalidFloorNumberException {
             verifyGateNumber();
             verifyGateType();
             verifyOperator();
+            verifyFloorNumber();
+        }
+
+        private void verifyFloorNumber() throws InvalidFloorNumberException {
+            if (floorNumber < 0) {
+                throw new InvalidFloorNumberException("Invalid floor number");
+            }
         }
 
         private void verifyOperator() throws InvalidOperatorException {

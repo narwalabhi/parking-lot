@@ -18,7 +18,7 @@ public class ParkingFloor extends BaseModel {
     }
 
     public ParkingFloor(Builder builder) {
-        super(builder.id, builder.cretedBy);
+        super(builder.id, builder.createdBy);
         this.status = Status.OPEN;
         this.floorNumber = builder.floorNumber;
         this.parkingSlots = builder.parkingSlots;
@@ -44,7 +44,7 @@ public class ParkingFloor extends BaseModel {
     public static class Builder {
 
         private int id;
-        private String cretedBy;
+        private String createdBy;
         private int floorNumber;
         private List<ParkingSlot> parkingSlots;
         private List<Gate> gate;
@@ -55,7 +55,7 @@ public class ParkingFloor extends BaseModel {
         }
 
         public Builder createdBy(String createdBy) {
-            this.cretedBy = createdBy;
+            this.createdBy = createdBy;
             return this;
         }
 
