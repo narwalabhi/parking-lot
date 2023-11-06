@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class GateRepo {
 
-    private static   final HashMap<Integer, Gate> gates = new HashMap<>();
+    private static  final HashMap<Integer, Gate> gates = new HashMap<>();
 
     public void addGate(Gate gate) {
         gates.put(gate.getId(), gate);

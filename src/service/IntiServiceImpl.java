@@ -11,6 +11,7 @@ import repo.ParkingSlotRepo;
 import service.strategy.feeCalculationStrategy.DefaultFeeCalculationStrategy;
 import service.strategy.slotAllocationStrategy.NextVacantSlotAllocationStrategy;
 
+import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -38,13 +39,37 @@ public class IntiServiceImpl implements InitService {
             Gate entryGate = null;
             Gate exitGate = null;
             try {
+
+                Operator operator = new Operator.Builder()
+                        .id(1)
+                        .name("Operator 1")
+                        .email("test@gmail.com")
+                        .phoneNumber("1234567890")
+                        .password("password")
+                        .address(new Address.Builder()
+                                .fullAddress("Street A, City B, State C")
+                                .city("City B")
+                                .country("Country D")
+                                .zipCode("123456")
+                                .landmark("Landmark E")
+                                .state("State C")
+                                .houseNumber("123")
+                                .build()
+                        )
+                        .build();
+
                 entryGate = new Gate.Builder()
+                        .id(1)
+                        .operator(operator)
                         .gateNumber(i * 10 + 1)
                         .floorNumber(i)
                         .gateType(GateType.ENTRY)
                         .build();
 
+
                 exitGate = new Gate.Builder()
+                        .id(2)
+                        .operator(operator)
                         .gateNumber(i * 10 + 2)
                         .floorNumber(i)
                         .gateType(GateType.EXIT)
@@ -52,6 +77,26 @@ public class IntiServiceImpl implements InitService {
 
             } catch (InvalidOperatorException | InvalidGateNumberException | InvalidGateTypeException |
                      InvalidFloorNumberException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidNameException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidPasswordException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidEmailException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidAddressException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidHouseNumberException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidAddressLineException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidCountryException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidZipCodeException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidStateException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidCityException e) {
                 throw new RuntimeException(e);
             }
 
@@ -64,6 +109,7 @@ public class IntiServiceImpl implements InitService {
 
                 try {
                     ParkingSlot parkingSlot = new ParkingSlot.Builder()
+                            .id(i * 100 + j)
                             .slotNumber(i * 100 + j)
                             .vehicleType(j % 2 != 0 ? VehicleType.BIKE : VehicleType.CAR)
                             .build();
@@ -77,6 +123,7 @@ public class IntiServiceImpl implements InitService {
 
             try {
                 ParkingFloor parkingFloor = new ParkingFloor.Builder()
+                        .id(i)
                         .FloorNumber(i)
                         .Gate(Arrays.asList(entryGate, exitGate))
                         .ParkingSlots(parkingSlots)
@@ -95,6 +142,7 @@ public class IntiServiceImpl implements InitService {
         try {
             try {
                 ParkingLot parkingLot = new ParkingLot.Builder()
+                        .id(1)
                         .parkingFloors(parkingFloors)
                         .allowedVehicleTypes(Arrays.asList(VehicleType.BIKE, VehicleType.CAR))
                         .name("Parking Lot 1")

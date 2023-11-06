@@ -55,12 +55,12 @@ public class Vehicle extends BaseModel {
             return this;
         }
 
-        public Builder RegistrationNumber(String registrationNumber) {
+        public Builder registrationNumber(String registrationNumber) {
             this.registrationNumber = registrationNumber;
             return this;
         }
 
-        public Builder VehicleType(VehicleType vehicleType) {
+        public Builder vehicleType(VehicleType vehicleType) {
             this.vehicleType = vehicleType;
             return this;
         }
